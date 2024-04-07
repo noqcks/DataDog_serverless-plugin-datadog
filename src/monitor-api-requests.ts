@@ -101,7 +101,7 @@ export async function searchMonitors(site: string, queryTag: string, monitorsApi
       throw new Error(`Can't fetch monitors. Status code: ${response.status}. Message: ${response.statusText}`);
     }
 
-    const json = await response.json();
+    const json = await response.json() as { monitors: QueriedMonitor[], metadata: { page_count: number } };
     monitors = monitors.concat(json.monitors);
     pageCount = json.metadata.page_count;
     page += 1;
